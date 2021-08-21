@@ -11,5 +11,5 @@ Various small projects written in Rust.
 ### [Budget](./projects/budget)
 Csv parsing and sqlite.
 
-### [Too many lists](./projects/too-many-lists)
+### [Too many lists](./projects/too_many_lists)
 Learn Rust with entirely too many linked [lists](https://rust-unofficial.github.io/too-many-lists/index.html).
