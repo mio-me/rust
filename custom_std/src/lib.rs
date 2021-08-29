@@ -1,4 +1,6 @@
 #[cfg(test)]
+mod patterns;
+
 mod tests {
   #[test]
   fn it_works() {
