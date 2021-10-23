@@ -14,5 +14,5 @@ Csv parsing and sqlite.
 ### [Too many lists](./projects/too_many_lists)
 Learn Rust with entirely too many linked [lists](https://rust-unofficial.github.io/too-many-lists/index.html).
 
-## [Custom std](./custom_std)
+## [Examples](./examples)
 Algorithms and patterns.
