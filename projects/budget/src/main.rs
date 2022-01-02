@@ -61,9 +61,7 @@ fn init_db(conn: &Connection) -> rusqlite::Result<()> {
   conn.execute(
     "create table if not exists account (
          id integer primary key,
-         date text not null,
-         account text not null,
-         value integer not null
+         name text not null
      )",
     params![],
   )?;
