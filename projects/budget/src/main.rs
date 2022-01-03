@@ -1,6 +1,8 @@
+use std::collections::hash_map::DefaultHasher;
 use std::env;
 use std::error::Error;
 use std::ffi::OsString;
+use std::hash::{Hash, Hasher};
 use std::process;
 
 use rusqlite::{params, Connection};
@@ -17,10 +19,13 @@ fn parse() -> Result<(), Box<dyn Error>> {
   let conn = Connection::open("banking.db")?;
   init_db(&conn)?;
 
+  let mut s = DefaultHasher::new();
+
   for record in reader.records().skip(13) {
-    if let Ok(t) = transaction::from_vb_csv(&record?) {
-      println!("{:?}", t);
-      add_transaction(&conn, &t)?;
+    let record = record?;
+    if let Ok(t) = transaction::from_vb_csv(&record) {
+      t.hash(&mut s);
+      add_transaction(&conn, &t, s.finish())?;
     }
   }
   Ok(())
@@ -40,28 +45,33 @@ fn main() {
   }
 }
 
-fn add_transaction(conn: &Connection, t: &transaction::Transaction) -> rusqlite::Result<usize> {
+fn add_transaction(
+  conn: &Connection,
+  t: &transaction::Transaction,
+  hash: u64,
+) -> rusqlite::Result<usize> {
+  println!("{}: {:?}", hash, t);
+
   conn.execute(
-    "INSERT INTO transactions (date, account, value) values (?1, ?2, ?3)",
-    params![t.date.to_string(), t.account, t.value],
+    "INSERT INTO transactions (id, date, account, purpose, value) values (?1, ?2, ?3, ?4, ?5)",
+    params![
+      hash.to_string(),
+      t.date.to_string(),
+      t.account,
+      t.purpose,
+      t.value
+    ],
   )
 }
 
 fn init_db(conn: &Connection) -> rusqlite::Result<()> {
   conn.execute(
     "create table if not exists transactions (
-         id integer primary key,
+         id blob primary key,
          date text not null,
          account text not null,
+         purpose text not null,
          value integer not null
-     )",
-    params![],
-  )?;
-
-  conn.execute(
-    "create table if not exists account (
-         id integer primary key,
-         name text not null
      )",
     params![],
   )?;

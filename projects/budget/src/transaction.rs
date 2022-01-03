@@ -4,39 +4,27 @@ use std::error::Error;
 use chrono::NaiveDate;
 use simple_error::bail;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Hash)]
 pub struct Transaction {
-  pub account: String,
   pub date: NaiveDate,
+  pub account: String,
+  pub purpose: String,
   pub value: i64,
 }
 
 pub fn from_vb_csv(record: &csv::StringRecord) -> Result<Transaction, Box<dyn Error>> {
-  // "Buchungstag";
-  // "Valuta";
-  // "Auftraggeber/Zahlungsempf�nger";
-  // "Empf�nger/Zahlungspflichtiger";
-  // "Konto-Nr.";
-  // "IBAN";
-  // "BLZ";
-  // "BIC";
-  // "Vorgang/Verwendungszweck";
-  // "Kundenreferenz";
-  // "W�hrung";
-  // "Umsatz";
-  // " "
-
   if record.len() != 13 {
     bail!("Failed to parse. Entry too short.");
   }
 
-  if [1usize, 3, 11, 12].iter().any(|i| &record[*i] == "") {
+  if [1usize, 3, 8, 11, 12].iter().any(|i| &record[*i] == "") {
     bail!("Failed to parse. Missing fields.");
   }
 
   Ok(Transaction {
-    account: String::from(&record[3]),
     date: NaiveDate::parse_from_str(&record[1], "%d.%m.%Y")?,
+    account: String::from(&record[3]),
+    purpose: String::from(&record[8]),
     value: get_value(&record[11], &record[12])?,
   })
 }
@@ -65,8 +53,9 @@ mod tests {
     assert_eq!(
       records.get(0),
       Some(&Transaction {
-        account: "Receiver".to_string(),
         date: NaiveDate::from_ymd(2021, 12, 23),
+        account: "Receiver".to_string(),
+        purpose: "reason bla bla".to_string(),
         value: -909
       })
     );
