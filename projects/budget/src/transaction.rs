@@ -1,6 +1,4 @@
-use core::panic;
 use std::error::Error;
-
 use chrono::NaiveDate;
 use simple_error::bail;
 
@@ -14,11 +12,11 @@ pub struct Transaction {
 
 pub fn from_vb_csv(record: &csv::StringRecord) -> Result<Transaction, Box<dyn Error>> {
   if record.len() != 13 {
-    bail!("Failed to parse. Entry too short.");
+    bail!("Failed to parse. Invalid entry length.");
   }
 
   if [1usize, 3, 8, 11, 12].iter().any(|i| &record[*i] == "") {
-    bail!("Failed to parse. Missing fields.");
+    bail!("Failed to parse. Missing field.");
   }
 
   Ok(Transaction {
@@ -35,7 +33,7 @@ fn get_value(raw_value: &str, sign: &str) -> Result<i64, Box<dyn Error>> {
   match sign {
     "S" => Ok(-1 * value),
     "H" => Ok(value),
-    _ => panic!("Failed to parse. No sign."),
+    _ => bail!("Failed to parse. No sign."),
   }
 }
 
