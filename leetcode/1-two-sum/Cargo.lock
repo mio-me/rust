@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "p605-can-place-flowers"
+name = "two-sum"
 version = "0.1.0"
