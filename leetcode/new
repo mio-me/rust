@@ -4,4 +4,4 @@ IFS='-' read -r id name <<< "$1"
 
 cargo new --lib "$id-$name" --name "$name"
 
-echo "| $id | $name | $2 |" >> readme.md
+echo "| $id | [$name](https://leetcode.com/problems/$name) | $2 |" >> readme.md
