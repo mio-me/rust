@@ -16,3 +16,6 @@ Learn Rust with entirely too many linked [lists](https://rust-unofficial.github.
 
 ## [Examples](./examples)
 Algorithms and patterns.
+
+## [Leetcode](./leetcode)
+Solutions to some leetcode problems.
