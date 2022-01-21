@@ -1,19 +1,13 @@
 struct Solution;
 impl Solution {
   pub fn length_of_longest_substring(s: String) -> i32 {
-    let mut longest = String::from("");
-    let mut current = String::from("");
-
-    for c in s.chars() {
-      if current.contains(c) {
-        if current.len() > longest.len() {
-          longest = current.clone();
-        }
-        current = current.split(c).skip(1).collect::<String>();
-      }
-      current.push(c);
-    }
-    std::cmp::max(longest.len(), current.len()) as i32
+    s.bytes().enumerate().fold(&mut [0; 258], |map, (i, c)| {
+      let c = c as usize;
+      map[257] = map[257].max(map[c]);
+      map[c] = i + 1;
+      map[256] = map[256].max(i - map[257] + 1);
+      map
+    })[256] as i32
   }
 }
 
