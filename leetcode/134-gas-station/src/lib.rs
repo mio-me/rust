@@ -1,38 +1,25 @@
 struct Solution;
 impl Solution {
   pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
-    let steps = gas
-      .iter()
-      .zip(&cost)
-      .map(|(g, c)| g - c)
-      .collect::<Vec<_>>();
-
-    if steps.len() == 1 {
-      if steps[0] >= 0 {
-        return 0;
-      } else {
-        return -1;
-      }
-    }
-
-    for i in 0..steps.len() {
-      if steps[i] < 1 {
-        continue;
-      };
-
-      let mut current = 0;
-      for j in (i..steps.len()).chain(0..i) {
-        current += steps[j];
-
-        if (j as i32 == i as i32 - 1i32 || j == steps.len() - 1 && i == 0) && current >= 0 {
-          return i as i32;
+    let (total_gas, _, start) = gas.iter().zip(&cost).map(|(a, b)| a - b).enumerate().fold(
+      (0, 0, 0),
+      |(total_gas, current_gas, start), (i, next_gas_diff)| {
+        if current_gas + next_gas_diff < 0 {
+          (total_gas + next_gas_diff, 0, i + 1)
+        } else {
+          (
+            total_gas + next_gas_diff,
+            current_gas + next_gas_diff,
+            start,
+          )
         }
-        if current < 1 {
-          break;
-        }
-      }
+      },
+    );
+    if total_gas >= 0 {
+      start as i32
+    } else {
+      -1
     }
-    -1
   }
 }
 
