@@ -1,7 +1,8 @@
 |    # | Problem                                                                                                                        | Difficulty |
 | ---: | ------------------------------------------------------------------------------------------------------------------------------ | ---------- |
 |    1 | [two-sum](https://leetcode/problems/two-sum)                                                                                   | easy       |
+|    3 | [longest-substring-without-repeating-characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) | medium     |
 |    4 | [median-of-two-sorted-arrays](https://leetcode/problems/median-of-two-sorted-arrays)                                           | hard       |
 |  118 | [pascals-triangle](https://leetcode/problems/pascals-triangle)                                                                 | easy       |
 |  134 | [gas-station](https://leetcode.com/problems/gas-station)                                                                       | medium     |
-|    3 | [longest-substring-without-repeating-characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) | medium     |
+| 1510 | [stone-game-iv](https://leetcode.com/problems/stone-game-iv)                                                                   | hard       |
