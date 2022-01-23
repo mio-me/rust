@@ -5,4 +5,5 @@
 |    4 | [median-of-two-sorted-arrays](https://leetcode/problems/median-of-two-sorted-arrays)                                           | hard       |
 |  118 | [pascals-triangle](https://leetcode/problems/pascals-triangle)                                                                 | easy       |
 |  134 | [gas-station](https://leetcode.com/problems/gas-station)                                                                       | medium     |
+| 1345 | [jump-game-iv](https://leetcode.com/problems/jump-game-iv)                                                                     | hard       |
 | 1510 | [stone-game-iv](https://leetcode.com/problems/stone-game-iv)                                                                   | hard       |
