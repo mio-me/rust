@@ -8,3 +8,4 @@
 |  941 | [valid-mountain-array](https://leetcode.com/problems/valid-mountain-array)                                                     | easy       |
 | 1345 | [jump-game-iv](https://leetcode.com/problems/jump-game-iv)                                                                     | hard       |
 | 1510 | [stone-game-iv](https://leetcode.com/problems/stone-game-iv)                                                                   | hard       |
+| 1305 | [all-elements-in-two-binary-search-trees](https://leetcode.com/problems/all-elements-in-two-binary-search-trees) |  |
