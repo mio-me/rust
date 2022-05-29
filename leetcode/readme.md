@@ -9,3 +9,4 @@
 | 1345 | [jump-game-iv](https://leetcode.com/problems/jump-game-iv)                                                                     | hard       |
 | 1510 | [stone-game-iv](https://leetcode.com/problems/stone-game-iv)                                                                   | hard       |
 | 1305 | [all-elements-in-two-binary-search-trees](https://leetcode.com/problems/all-elements-in-two-binary-search-trees) |  |
+| 318 | [maximum-product-of-word-lengths](https://leetcode.com/problems/maximum-product-of-word-lengths) | medium |
