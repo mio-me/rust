@@ -1,6 +1,7 @@
 |    # | Problem                                                                                                                        | Difficulty |
 | ---: | ------------------------------------------------------------------------------------------------------------------------------ | ---------- |
 |    1 | [two-sum](https://leetcode/problems/two-sum)                                                                                   | easy       |
+| 2 | [valid-parentheses](https://leetcode.com/problems/valid-parentheses) | easy |
 |    3 | [longest-substring-without-repeating-characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) | medium     |
 |    4 | [median-of-two-sorted-arrays](https://leetcode/problems/median-of-two-sorted-arrays)                                           | hard       |
 |  118 | [pascals-triangle](https://leetcode/problems/pascals-triangle)                                                                 | easy       |
@@ -8,5 +9,10 @@
 |  941 | [valid-mountain-array](https://leetcode.com/problems/valid-mountain-array)                                                     | easy       |
 | 1345 | [jump-game-iv](https://leetcode.com/problems/jump-game-iv)                                                                     | hard       |
 | 1510 | [stone-game-iv](https://leetcode.com/problems/stone-game-iv)                                                                   | hard       |
-| 1305 | [all-elements-in-two-binary-search-trees](https://leetcode.com/problems/all-elements-in-two-binary-search-trees) |  |
+| 1305 | [all-elements-in-two-binary-search-trees](https://leetcode.com/problems/all-elements-in-two-binary-search-trees) | easy |
 | 318 | [maximum-product-of-word-lengths](https://leetcode.com/problems/maximum-product-of-word-lengths) | medium |
+| 21 | [merge-two-sorted-lists](https://leetcode.com/problems/merge-two-sorted-lists) | easy |
+| 121 | [best-time-to-buy-and-sell-stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock) | easy |
+| 125 | [valid-palindrome](https://leetcode.com/problems/valid-palindrome) | easy |
+| 242 | [valid-anagram](https://leetcode.com/problems/valid-anagram) | easy |
+| 704 | [binary-search](https://leetcode.com/problems/binary-search) | easy |
