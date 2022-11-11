@@ -1,11 +1,11 @@
 #[derive(PartialEq, Debug)]
-pub struct StrSplit<'a> {
-  remainder: Option<&'a str>,
-  delimiter: &'a str,
+pub struct StrSplit<'haystack, 'delimiter> {
+  remainder: Option<&'haystack str>,
+  delimiter: &'delimiter str,
 }
 
-impl<'a> StrSplit<'a> {
-  pub fn new(haystack: &'a str, delimiter: &'a str) -> Self {
+impl<'haystack, 'delimiter> StrSplit<'haystack, 'delimiter> {
+  pub fn new(haystack: &'haystack str, delimiter: &'delimiter str) -> Self {
     Self {
       remainder: Some(haystack),
       delimiter,
@@ -13,8 +13,8 @@ impl<'a> StrSplit<'a> {
   }
 }
 
-impl<'a> Iterator for StrSplit<'a> {
-  type Item = &'a str;
+impl<'haystack, 'delimiter> Iterator for StrSplit<'haystack, 'delimiter> {
+  type Item = &'haystack str;
   fn next(&mut self) -> Option<Self::Item> {
     let remainder = self.remainder.as_mut()?;
     if let Some(next_delim) = remainder.find(self.delimiter) {
@@ -25,6 +25,12 @@ impl<'a> Iterator for StrSplit<'a> {
       self.remainder.take()
     }
   }
+}
+
+fn until_char<'a>(s: &'a str, c: char) -> &'a str {
+  StrSplit::new(s, &format!("{}", c))
+    .next()
+    .expect("StrSplit always gives at least one result")
 }
 
 #[cfg(test)]
@@ -42,5 +48,10 @@ mod tests {
     let haystack = "a b c d ";
     let letters = StrSplit::new(haystack, " ");
     assert!(letters.eq(vec!["a", "b", "c", "d", ""].into_iter()));
+  }
+
+  #[test]
+  fn until_char_test() {
+    assert_eq!(until_char("hello world", 'o'), "hell");
   }
 }
