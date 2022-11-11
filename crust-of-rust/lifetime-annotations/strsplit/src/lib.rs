@@ -1,13 +1,13 @@
 #[derive(PartialEq, Debug)]
 pub struct StrSplit<'a> {
-  remainder: &'a str,
+  remainder: Option<&'a str>,
   delimiter: &'a str,
 }
 
 impl<'a> StrSplit<'a> {
   pub fn new(haystack: &'a str, delimiter: &'a str) -> Self {
     Self {
-      remainder: haystack,
+      remainder: Some(haystack),
       delimiter,
     }
   }
@@ -16,19 +16,14 @@ impl<'a> StrSplit<'a> {
 impl<'a> Iterator for StrSplit<'a> {
   type Item = &'a str;
   fn next(&mut self) -> Option<Self::Item> {
-    if let Some(next_delim) = self.remainder.find(self.delimiter) {
-      let until_delimiter = &self.remainder[..next_delim];
-      self.remainder = &self.remainder[(next_delim + self.delimiter.len())..];
-      Some(until_delimiter)
-    } else if self.remainder.is_empty() {
-      None
+    let remainder = self.remainder.as_mut()?;
+    if let Some(next_delim) = remainder.find(self.delimiter) {
+      let until_delim = &remainder[..next_delim];
+      *remainder = &remainder[(next_delim + self.delimiter.len())..];
+      Some(until_delim)
     } else {
-      let rest = self.remainder;
-      self.remainder = "";
-      Some(rest)
+      self.remainder.take()
     }
-    // find next pos in remainder
-    // return split until this pos
   }
 }
 
@@ -38,7 +33,14 @@ mod tests {
   #[test]
   fn it_works() {
     let haystack = "a b c d e";
+    let letters = StrSplit::new(haystack, " ").collect::<Vec<_>>();
+    assert_eq!(letters, vec!["a", "b", "c", "d", "e"]);
+  }
+
+  #[test]
+  fn tail() {
+    let haystack = "a b c d ";
     let letters = StrSplit::new(haystack, " ");
-    assert!(letters.eq(vec!["a", "b", "c", "d", "e"].into_iter()));
+    assert!(letters.eq(vec!["a", "b", "c", "d", ""].into_iter()));
   }
 }
