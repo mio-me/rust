@@ -5,6 +5,9 @@ Loose collection of Rust exercise projects.
 ## [Book](./book)
 Project examples from [The Book](https://doc.rust-lang.org/book/).
 
+## [Crust of Rust](./crust-of-rust/)
+Intermediate Rust concepts following the examples of [Crust of Rust](https://www.youtube.com/playlist?list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa) by Jon Gjengset.
+
 ## [Projects](./projects)
 Various small projects written in Rust.
 
