@@ -3,6 +3,13 @@ use std::{
   sync::{Arc, Condvar, Mutex},
 };
 
+/* https://www.youtube.com/watch?v=b4mS5UPHh20&list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa&index=5
+    - synchronous
+    - async
+    - rendezvous
+    - oneshot
+*/
+
 pub struct Sender<T> {
   shared: Arc<Shared<T>>,
 }
@@ -21,8 +28,8 @@ impl<T> Clone for Sender<T> {
 impl<T> Drop for Sender<T> {
   fn drop(&mut self) {
     let mut inner = self.shared.inner.lock().unwrap();
-    inner.senders -= 1;
     let was_last = inner.senders == 0;
+    inner.senders -= 1;
     drop(inner);
     if was_last {
       self.shared.available.notify_one();
@@ -74,12 +81,11 @@ pub fn channel<T>() -> (Sender<T>, Receiver<T>) {
     senders: 1,
   };
 
-  let shared = Shared {
+  let shared = Arc::new(Shared {
     inner: Mutex::new(inner),
     available: Condvar::new(),
-  };
+  });
 
-  let shared = Arc::new(shared);
   (
     Sender {
       shared: shared.clone(),
