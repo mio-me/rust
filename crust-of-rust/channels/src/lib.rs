@@ -109,7 +109,7 @@ mod tests {
 
   #[test]
   fn closed_rx() {
-    let (_, mut rx) = channel::<usize>();
-    assert_eq!(rx.recv(), None);
+    let (mut tx, _) = channel::<usize>();
+    tx.send(42);
   }
 }
